@@ -21,12 +21,5 @@ Open `index.html` in any browser. No build step.
 - Each `.member` card → set `[Name]` / `[Role]`, drop a photo into the `.avatar`
   (`<img src="photos/your.jpg" alt="Name">`), and update the links.
 
-## Live AI scoring (optional)
-The Trust Verifier runs on a built-in demo simulation out of the box. To make it
-score claims with **real Claude Opus 4.8**, deploy the Cloudflare Worker in
-[`worker/`](worker/README.md) and paste its URL into `VERIFIER_API` in `script.js`.
-The Anthropic API key lives only in the Worker secret — never in the static site.
-
 ## Stack
-Plain HTML / CSS / JS (no build step). Backend: Cloudflare Worker → Claude Opus 4.8.
-Fonts: Space Grotesk, Inter, IBM Plex Mono.
+Plain HTML / CSS / JS. Fonts: Space Grotesk, Inter, IBM Plex Mono.

@@ -1,6 +1,0 @@
-name = "trust-verifier"
-main = "worker.js"
-compatibility_date = "2026-06-24"
-
-# The Anthropic API key is NOT stored here. Set it as an encrypted secret:
-#   npx wrangler secret put ANTHROPIC_API_KEY

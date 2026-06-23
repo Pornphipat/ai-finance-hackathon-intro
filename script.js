@@ -10,11 +10,6 @@
   "use strict";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // ← Paste your deployed Cloudflare Worker URL here to enable LIVE Claude scoring.
-  //   Leave empty to use the built-in demo simulation. You can also set it at
-  //   runtime via window.VERIFIER_API or localStorage "ynm-verifier-api".
-  const VERIFIER_API = "";
-
   /* ---------- language toggle ---------- */
   const html = document.documentElement;
   const toggle = document.getElementById("lang-toggle");
@@ -128,46 +123,14 @@
     }
   }
 
-  // Live backend: resolve scores from the Claude Worker if configured,
-  // otherwise fall back to the deterministic local simulation.
-  const AGENT_ORDER = ["News", "Filings", "Market", "Web RAG"];
-  function verifierEndpoint() {
-    try {
-      return (window.VERIFIER_API || localStorage.getItem("ynm-verifier-api") || VERIFIER_API || "").trim();
-    } catch (_) {
-      return VERIFIER_API;
-    }
-  }
-  async function resolveScores(claim) {
-    const url = verifierEndpoint();
-    if (!url) return scoresFor(claim); // no backend → demo simulation
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ claim }),
-      });
-      if (!res.ok) throw new Error("status " + res.status);
-      const data = await res.json();
-      const byName = {};
-      (data.agents || []).forEach((a) => { byName[a.name] = a.score; });
-      const sim = scoresFor(claim);
-      return AGENT_ORDER.map((n, i) => {
-        const v = Number(byName[n]);
-        return Number.isFinite(v) ? Math.max(0, Math.min(100, Math.round(v))) : sim[i];
-      });
-    } catch (_) {
-      return scoresFor(claim); // network/parse failure → demo simulation
-    }
-  }
-
-  async function runVerifier() {
+  function runVerifier() {
     if (!verifier || busy) return;
     busy = true;
     if (vfRun) vfRun.disabled = true;
+    // score the current claim
     const claim = vfInput && vfInput.value.trim() ? vfInput.value.trim() : "default";
-
-    // reset to "verifying" state (also covers the live-fetch wait)
+    finals = scoresFor(claim);
+    // reset
     agents.forEach((a) => {
       a.classList.remove("is-live", "is-done");
       a.querySelector(".vf-a-score").textContent = "—";
@@ -175,9 +138,6 @@
     if (fill) fill.style.width = "0%";
     if (scoreEl) scoreEl.textContent = "0";
     setVerdict(false);
-
-    // live Claude scoring if a Worker URL is set, else local simulation
-    finals = await resolveScores(claim);
 
     if (reduceMotion) {
       // static, fully-resolved state — no animation
