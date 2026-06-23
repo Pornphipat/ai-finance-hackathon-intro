@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>อยู่ไม่ไหว อยู่ไม่ไหว เฮ้ย — AI × Finance Hackathon</title>
+  <meta name="description" content="Team intro for the CFA Society Thailand AI × Finance Hackathon. We turn a flood of conflicting financial data into one trusted signal with multi-agent verification." />
+
+  <!-- Fonts: Space Grotesk (display), Inter (body), IBM Plex Mono (data/utility) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ambient signal-from-noise backdrop -->
+  <canvas id="bg-noise" aria-hidden="true"></canvas>
+
+  <!-- ============ HEADER / NAV ============ -->
+  <header class="site-header" id="top">
+    <a href="#hero" class="brand" aria-label="Back to top">
+      <span class="brand-mark" aria-hidden="true">◈</span>
+      <span class="brand-name">อยู่ไม่ไหว อยู่ไม่ไหว เฮ้ย</span>
+    </a>
+
+    <nav class="nav" aria-label="Section navigation">
+      <a href="#hero" class="nav-link" data-th="หน้าแรก" data-en="Home">Home</a>
+      <a href="#work" class="nav-link" data-th="สิ่งที่เราทำ" data-en="What we do">What we do</a>
+      <a href="#motto" class="nav-link" data-th="คติประจำทีม" data-en="Motto">Motto</a>
+      <a href="#team" class="nav-link" data-th="สมาชิก" data-en="Team">Team</a>
+      <button id="lang-toggle" class="lang-toggle" type="button" aria-label="Switch language">
+        <span class="lang-opt is-on" data-lang-opt="en">EN</span>
+        <span class="lang-sep">/</span>
+        <span class="lang-opt" data-lang-opt="th">TH</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-th="CFA Society Thailand · แฮกกาธอน AI × การเงิน" data-en="CFA Society Thailand · AI × Finance Hackathon">CFA Society Thailand · AI × Finance Hackathon</p>
+
+          <!-- Team name stays Thai across languages -->
+          <h1 class="hero-title">อยู่ไม่ไหว<br />อยู่ไม่ไหว <span class="accent">เฮ้ย</span></h1>
+
+          <!-- [PROJECT NAME] — fill in your project name when ready -->
+          <p class="hero-project"><span class="proj-label" data-th="โปรเจกต์" data-en="Project">Project</span> <span class="proj-name">[PROJECT NAME]</span></p>
+
+          <p class="hero-lede" data-th="ข้อมูลการเงินมหาศาลและขัดแย้งกันเอง เราเปลี่ยนมันให้เหลือ ‘สัญญาณที่เชื่อถือได้’ หนึ่งเดียว ด้วยการตรวจสอบแบบหลายเอเจนต์" data-en="A flood of conflicting financial data, resolved into one signal you can trust — using agents that fact-check each other.">A flood of conflicting financial data, resolved into one signal you can trust — using agents that fact-check each other.</p>
+
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary" data-th="ดูสิ่งที่เราสร้าง" data-en="See what we build">See what we build</a>
+            <a href="#team" class="btn btn-ghost" data-th="พบทีมงาน" data-en="Meet the team">Meet the team</a>
+          </div>
+        </div>
+
+        <!-- ===== SIGNATURE: Multi-Agent Trust Verifier ===== -->
+        <aside class="verifier" id="verifier" aria-label="Live multi-agent trust verification demo">
+          <div class="verifier-head">
+            <span class="vf-dot" aria-hidden="true"></span>
+            <span class="vf-label" data-th="เครื่องตรวจความน่าเชื่อถือ (สาธิต)" data-en="Trust Verifier · live demo">Trust Verifier · live demo</span>
+          </div>
+
+          <form class="vf-form" id="vf-form">
+            <label class="vf-claim-tag" for="vf-input" data-th="ทดสอบข้ออ้าง" data-en="TEST A CLAIM">TEST A CLAIM</label>
+            <div class="vf-form-row">
+              <input id="vf-input" class="vf-input" type="text" value="Q3 revenue grew 18% YoY"
+                     maxlength="80" autocomplete="off"
+                     aria-label="Financial claim to verify" />
+              <button class="vf-run" id="vf-run" type="submit" data-th="ตรวจสอบ" data-en="Verify">Verify</button>
+            </div>
+          </form>
+
+          <ul class="vf-agents" aria-hidden="true">
+            <li class="vf-agent" data-agent="1"><span class="vf-a-name">Agent · News</span><span class="vf-a-score">—</span></li>
+            <li class="vf-agent" data-agent="2"><span class="vf-a-name">Agent · Filings</span><span class="vf-a-score">—</span></li>
+            <li class="vf-agent" data-agent="3"><span class="vf-a-name">Agent · Market</span><span class="vf-a-score">—</span></li>
+            <li class="vf-agent" data-agent="4"><span class="vf-a-name">Agent · Web RAG</span><span class="vf-a-score">—</span></li>
+          </ul>
+
+          <div class="vf-meter">
+            <div class="vf-meter-track"><div class="vf-meter-fill" id="vf-fill"></div></div>
+            <div class="vf-meter-read">
+              <span class="vf-score" id="vf-score">0</span><span class="vf-pct">%</span>
+              <span class="vf-verdict" id="vf-verdict" data-th="กำลังตรวจสอบ…" data-en="verifying…">verifying…</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <a href="#work" class="scroll-cue" aria-hidden="true">
+        <span data-th="เลื่อนลง" data-en="scroll">scroll</span> ↓
+      </a>
+    </section>
+
+    <!-- ============ WHAT WE DO ============ -->
+    <section class="work" id="work">
+      <header class="section-head reveal">
+        <span class="section-no">01</span>
+        <h2 class="section-title" data-th="สิ่งที่เราจะสร้าง" data-en="What we'll build">What we'll build</h2>
+      </header>
+
+      <div class="work-cols">
+        <article class="card problem reveal">
+          <span class="card-tag" data-th="ปัญหา" data-en="THE PROBLEM">THE PROBLEM</span>
+          <h3 class="card-title" data-th="ข้อมูลล้น เชื่อถือยาก" data-en="Too much data, too little trust">Too much data, too little trust</h3>
+          <p class="card-body" data-th="งานวิจัยการเงินหนึ่งครั้งต้องไล่อ่านจาก Bloomberg, FactSet, Capital IQ, ข่าวผู้บริหาร และข้อมูลกระจัดกระจายทั่วอินเทอร์เน็ต ใช้เวลานานและเสี่ยง human error" data-en="One research task means digging through Bloomberg, FactSet, Capital IQ, executive news, and scattered web sources. Slow, expert-heavy, and exposed to human error.">One research task means digging through Bloomberg, FactSet, Capital IQ, executive news, and scattered web sources. Slow, expert-heavy, and exposed to human error.</p>
+          <p class="card-body" data-th="พอเอา AI เข้ามาช่วย เจอข้อมูลเยอะ ๆ ก็ ‘หลอน’ (hallucinate) จนเชื่อผลลัพธ์ไม่ได้ สุดท้ายงานกลับเพิ่ม" data-en="Bring in AI and it hallucinates under heavy data — so you can't trust the output, and the workload grows instead of shrinking.">Bring in AI and it hallucinates under heavy data — so you can't trust the output, and the workload grows instead of shrinking.</p>
+        </article>
+
+        <article class="card solution reveal">
+          <span class="card-tag tag-green" data-th="ทางออกของเรา" data-en="OUR SOLUTION">OUR SOLUTION</span>
+          <h3 class="card-title" data-th="หลายเอเจนต์ ตรวจสอบกันเอง" data-en="Many agents, cross-checking each other">Many agents, cross-checking each other</h3>
+          <p class="card-body" data-th="เราใช้ LLM ทำ RAG search ดึงข้อมูลจากหลายแหล่ง แล้วให้ ‘หลายเอเจนต์’ ช่วยกันให้คะแนนความน่าเชื่อถือของแต่ละแหล่งและเทียบกันเอง" data-en="An LLM runs RAG search across many sources, then multiple agents independently score each source's credibility and compare results against one another.">An LLM runs RAG search across many sources, then multiple agents independently score each source's credibility and compare results against one another.</p>
+          <p class="card-body" data-th="การเทียบกันเองช่วยกดอาการหลอนของโมเดล และยังประมวลผลขนานกันได้ผลลัพธ์เร็วขึ้น — เหลือ ‘สัญญาณที่เชื่อถือได้’ พร้อมนำไปวิเคราะห์ต่อ" data-en="That cross-checking suppresses hallucination and runs in parallel for speed — leaving one trusted signal, ready for real analysis.">That cross-checking suppresses hallucination and runs in parallel for speed — leaving one trusted signal, ready for real analysis.</p>
+        </article>
+      </div>
+
+      <!-- ===== Animated SVG architecture diagram (multi-agent fan-out) ===== -->
+      <figure class="pipeline reveal" aria-label="System architecture: sources flow through RAG, fan out to multiple verifying agents, converge on consensus, and resolve into a trusted signal">
+        <figcaption class="pipe-cap" data-th="สถาปัตยกรรมระบบ" data-en="System architecture">System architecture</figcaption>
+
+        <div class="svg-wrap">
+          <svg class="arch" viewBox="0 0 980 320" role="img" preserveAspectRatio="xMidYMid meet">
+            <!-- connectors (animated flow via dashed stroke) -->
+            <g class="flow" fill="none" stroke-linecap="round">
+              <path d="M140,160 H200" />
+              <!-- RAG -> 4 agents -->
+              <path d="M310,160 C355,160 360,62 400,62" />
+              <path d="M310,160 C355,160 360,120 400,120" />
+              <path d="M310,160 C355,160 360,178 400,178" />
+              <path d="M310,160 C355,160 360,236 400,236" />
+              <!-- 4 agents -> consensus -->
+              <path d="M550,62  C600,62 600,160 620,160" />
+              <path d="M550,120 C600,120 600,160 620,160" />
+              <path d="M550,178 C600,178 600,160 620,160" />
+              <path d="M550,236 C600,236 600,160 620,160" />
+              <path d="M750,160 H820" />
+            </g>
+
+            <!-- nodes -->
+            <g class="arch-node">
+              <rect x="20" y="130" width="120" height="60" rx="10" />
+              <text x="80" y="156" class="n-title" data-th="แหล่งข้อมูล" data-en="Sources">Sources</text>
+              <text x="80" y="174" class="n-sub">Bloomberg · Web</text>
+            </g>
+            <g class="arch-node">
+              <rect x="200" y="130" width="110" height="60" rx="10" />
+              <text x="255" y="156" class="n-title">RAG Search</text>
+              <text x="255" y="174" class="n-sub" data-th="ดึงบริบท" data-en="retrieve">retrieve</text>
+            </g>
+
+            <!-- agents -->
+            <g class="arch-node agent">
+              <rect x="400" y="40" width="150" height="44" rx="9" />
+              <text x="475" y="67" class="n-agent">Agent · News</text>
+            </g>
+            <g class="arch-node agent">
+              <rect x="400" y="98" width="150" height="44" rx="9" />
+              <text x="475" y="125" class="n-agent">Agent · Filings</text>
+            </g>
+            <g class="arch-node agent">
+              <rect x="400" y="156" width="150" height="44" rx="9" />
+              <text x="475" y="183" class="n-agent">Agent · Market</text>
+            </g>
+            <g class="arch-node agent">
+              <rect x="400" y="214" width="150" height="44" rx="9" />
+              <text x="475" y="241" class="n-agent">Agent · Web RAG</text>
+            </g>
+
+            <g class="arch-node hot">
+              <rect x="620" y="130" width="130" height="60" rx="10" />
+              <text x="685" y="156" class="n-title" data-th="ลงมติ" data-en="Consensus">Consensus</text>
+              <text x="685" y="174" class="n-sub" data-th="เทียบ · โหวต" data-en="compare · vote">compare · vote</text>
+            </g>
+            <g class="arch-node out">
+              <rect x="820" y="130" width="140" height="60" rx="10" />
+              <text x="890" y="156" class="n-title" data-th="สัญญาณเชื่อถือ ✓" data-en="Trusted ✓">Trusted ✓</text>
+              <text x="890" y="174" class="n-sub" data-th="พร้อมวิเคราะห์" data-en="analysis-ready">analysis-ready</text>
+            </g>
+          </svg>
+        </div>
+      </figure>
+
+      <!-- ===== Why-us stats strip ===== -->
+      <ul class="stats reveal" aria-label="Why our approach">
+        <li class="stat">
+          <span class="stat-num">4+</span>
+          <span class="stat-lbl" data-th="แหล่งข้อมูลรวมศูนย์" data-en="data sources, unified">data sources, unified</span>
+        </li>
+        <li class="stat">
+          <span class="stat-num">N×</span>
+          <span class="stat-lbl" data-th="เอเจนต์ทำงานขนานกัน เร็วขึ้น" data-en="agents run in parallel, faster">agents run in parallel, faster</span>
+        </li>
+        <li class="stat">
+          <span class="stat-num">0</span>
+          <span class="stat-lbl" data-th="เป้าหมาย: ตัดอาการหลอนของโมเดล" data-en="tolerance for hallucination">tolerance for hallucination</span>
+        </li>
+        <li class="stat">
+          <span class="stat-num">1</span>
+          <span class="stat-lbl" data-th="สัญญาณที่เชื่อถือได้ ส่งออก" data-en="trusted signal, out">trusted signal, out</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============ MOTTO ============ -->
+    <section class="motto" id="motto">
+      <div class="motto-inner reveal">
+        <span class="motto-tag" data-th="คติประจำทีม" data-en="OUR PROMISE">OUR PROMISE</span>
+        <blockquote class="motto-quote">The hard part?<br /><span class="accent">That's on us.</span></blockquote>
+        <p class="motto-th">ให้ความยุ่งยาก<span class="motto-underscore">_</span>เป็นเรื่องของเรา</p>
+      </div>
+    </section>
+
+    <!-- ============ TEAM ============ -->
+    <section class="team" id="team">
+      <header class="section-head reveal">
+        <span class="section-no">02</span>
+        <h2 class="section-title" data-th="ทีมงาน" data-en="The team">The team</h2>
+        <p class="section-note" data-th="ห้าคน หนึ่งเป้าหมาย" data-en="Five people, one mission">Five people, one mission</p>
+      </header>
+
+      <!--
+        ===== MEMBER CARDS — FILL LATER =====
+        For each member: replace [Name] and [Role], drop a photo into the .avatar
+        (e.g. <img src="photos/yourname.jpg" alt="Name" />), and set the social links.
+      -->
+      <ul class="roster">
+        <!-- Member 1 -->
+        <li class="member reveal">
+          <div class="avatar"><!-- <img src="photos/m1.jpg" alt="" /> --><span class="avatar-ph" aria-hidden="true">01</span></div>
+          <h3 class="m-name">[Name]</h3>
+          <p class="m-role">[Role]</p>
+          <div class="m-links"><a href="#" aria-label="Member 1 link">in</a><a href="#" aria-label="Member 1 link">@</a></div>
+        </li>
+        <!-- Member 2 -->
+        <li class="member reveal">
+          <div class="avatar"><!-- <img src="photos/m2.jpg" alt="" /> --><span class="avatar-ph" aria-hidden="true">02</span></div>
+          <h3 class="m-name">[Name]</h3>
+          <p class="m-role">[Role]</p>
+          <div class="m-links"><a href="#" aria-label="Member 2 link">in</a><a href="#" aria-label="Member 2 link">@</a></div>
+        </li>
+        <!-- Member 3 -->
+        <li class="member reveal">
+          <div class="avatar"><!-- <img src="photos/m3.jpg" alt="" /> --><span class="avatar-ph" aria-hidden="true">03</span></div>
+          <h3 class="m-name">[Name]</h3>
+          <p class="m-role">[Role]</p>
+          <div class="m-links"><a href="#" aria-label="Member 3 link">in</a><a href="#" aria-label="Member 3 link">@</a></div>
+        </li>
+        <!-- Member 4 -->
+        <li class="member reveal">
+          <div class="avatar"><!-- <img src="photos/m4.jpg" alt="" /> --><span class="avatar-ph" aria-hidden="true">04</span></div>
+          <h3 class="m-name">[Name]</h3>
+          <p class="m-role">[Role]</p>
+          <div class="m-links"><a href="#" aria-label="Member 4 link">in</a><a href="#" aria-label="Member 4 link">@</a></div>
+        </li>
+        <!-- Member 5 -->
+        <li class="member reveal">
+          <div class="avatar"><!-- <img src="photos/m5.jpg" alt="" /> --><span class="avatar-ph" aria-hidden="true">05</span></div>
+          <h3 class="m-name">[Name]</h3>
+          <p class="m-role">[Role]</p>
+          <div class="m-links"><a href="#" aria-label="Member 5 link">in</a><a href="#" aria-label="Member 5 link">@</a></div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <p class="foot-team">อยู่ไม่ไหว อยู่ไม่ไหว เฮ้ย</p>
+    <p class="foot-event" data-th="แฮกกาธอน AI × การเงิน · CFA Society Thailand · 2026" data-en="AI × Finance Hackathon · CFA Society Thailand · 2026">AI × Finance Hackathon · CFA Society Thailand · 2026</p>
+    <a href="#top" class="foot-top" data-th="กลับขึ้นบน ↑" data-en="Back to top ↑">Back to top ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
