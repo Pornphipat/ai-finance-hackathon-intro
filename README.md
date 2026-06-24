@@ -16,10 +16,5 @@ multiple agents that fact-check each other to suppress hallucination.
 ## Run locally
 Open `index.html` in any browser. No build step.
 
-## Fill in later
-- `index.html` → replace `[PROJECT NAME]` in the hero.
-- Each `.member` card → set `[Name]` / `[Role]`, drop a photo into the `.avatar`
-  (`<img src="photos/your.jpg" alt="Name">`), and update the links.
-
 ## Stack
 Plain HTML / CSS / JS. Fonts: Space Grotesk, Inter, IBM Plex Mono.
