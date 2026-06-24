@@ -13,8 +13,5 @@ multiple agents that fact-check each other to suppress hallucination.
 - Animated SVG system architecture (Sources → RAG → multi-agent verify → trusted signal)
 - 5 team-member cards (placeholders to fill in)
 
-## Run locally
-Open `index.html` in any browser. No build step.
-
 ## Stack
 Plain HTML / CSS / JS. Fonts: Space Grotesk, Inter, IBM Plex Mono.
