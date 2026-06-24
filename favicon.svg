@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="7" fill="#0B1020"/>
+  <!-- converging signal lines: noisy sources -> one verified node -->
+  <g stroke="#5B8CFF" stroke-width="1.1" stroke-linecap="round" opacity="0.55">
+    <line x1="6" y1="7"  x2="20" y2="16"/>
+    <line x1="6" y1="16" x2="20" y2="16"/>
+    <line x1="6" y1="25" x2="20" y2="16"/>
+  </g>
+  <!-- raw / unverified source dots (amber) -->
+  <g fill="#F5A623">
+    <circle cx="6" cy="7"  r="2"/>
+    <circle cx="6" cy="16" r="2"/>
+    <circle cx="6" cy="25" r="2"/>
+  </g>
+  <!-- verified consensus node (green) -->
+  <circle cx="22" cy="16" r="6.5" fill="#34E0A1"/>
+  <path d="M19.2 16.2 L21.3 18.3 L25 13.8" fill="none" stroke="#0B1020"
+        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
